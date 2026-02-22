@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/alderson/Projects/Mine/labs/aa/build",
+  "command": "/usr/lib/ccache/c++  -I/home/alderson/Projects/Mine/labs/aa/shared/include -std=gnu++20 -o CMakeFiles/shared.dir/shared/src/export_to_csv.cpp.o -c /home/alderson/Projects/Mine/labs/aa/shared/src/export_to_csv.cpp",
+  "file": "/home/alderson/Projects/Mine/labs/aa/shared/src/export_to_csv.cpp",
+  "output": "CMakeFiles/shared.dir/shared/src/export_to_csv.cpp.o"
+},
+{
+  "directory": "/home/alderson/Projects/Mine/labs/aa/build",
+  "command": "/usr/lib/ccache/c++  -I/home/alderson/Projects/Mine/labs/aa/lab1/include -I/home/alderson/Projects/Mine/labs/aa/shared/include -std=gnu++20 -o CMakeFiles/lab1.dir/lab1/src/main.cpp.o -c /home/alderson/Projects/Mine/labs/aa/lab1/src/main.cpp",
+  "file": "/home/alderson/Projects/Mine/labs/aa/lab1/src/main.cpp",
+  "output": "CMakeFiles/lab1.dir/lab1/src/main.cpp.o"
+}
+]
