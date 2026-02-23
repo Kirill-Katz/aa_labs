@@ -1,5 +1,7 @@
 #pragma once
 
+#include <algorithm>
+#include <climits>
 #include <vector>
 #include <assert.h>
 #include <span>
@@ -123,5 +125,74 @@ inline void heap_sort(std::span<int> src) {
     }
 }
 
+inline void radix_sort_positive(std::span<int> src) {
+    if (!src.size()) return;
+
+    size_t n = src.size();
+    int max_val = src[0];
+    for (int i = 1; i < n; ++i) {
+        max_val = std::max(src[i], max_val);
+    }
+
+    std::vector<int> tmp(n);
+    auto get_digit = [](int n, int exp) {
+        return (n / exp) % 10;
+    };
+
+    auto count_sort = [&](std::span<int> src, int exp) {
+        size_t n = src.size();
+        std::array<int, 10> count;
+        count.fill(0);
+        std::array<int, 10> pref;
+        pref.fill(0);
+
+        for (size_t i = 0; i < n; ++i) {
+            count[get_digit(src[i], exp)]++;
+        }
+
+        pref[0] = 0;
+        for (size_t i = 1; i < 10; ++i) {
+            pref[i] = pref[i-1] + count[i-1];
+        }
+
+        for (size_t i = 0; i < n; ++i) {
+            int pos = pref[get_digit(src[i], exp)]++;
+            tmp[pos] = src[i];
+        }
+
+        std::ranges::copy(tmp, src.begin());
+    };
+
+    int exp = 1;
+    while (max_val / exp > 0) {
+        count_sort(src, exp);
+        exp *= 10;
+    }
+}
+
+inline void radix_sort(std::span<int> src) {
+    std::vector<int> positive;
+    std::vector<int> negative;
+
+    for (int i = 0; i < src.size(); ++i) {
+        if (src[i] >= 0) {
+            positive.push_back(src[i]);
+        } else {
+            negative.push_back(abs(src[i]));
+        }
+    }
+
+    radix_sort_positive({ positive.data(), positive.size() });
+    radix_sort_positive({ negative.data(), negative.size() });
+
+    for (size_t i = negative.size(); i-- > 0;) {
+        src[negative.size() - i - 1] = -negative[i];
+    }
+
+    int offset = negative.size();
+    for (int i = 0; i < positive.size(); ++i) {
+        src[offset + i] = positive[i];
+    }
+}
 
 

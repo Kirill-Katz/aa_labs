@@ -2,7 +2,9 @@
 
 #include <vector>
 
-inline std::vector<int> bfs(const std::vector<std::vector<int>>& graph, int start_node) {
+#include "shared.hpp"
+
+inline std::vector<int> bfs(const Graph& graph, int start_node) {
     std::vector<int> ans = { start_node };
     std::vector<int> current = { start_node };
     std::vector<bool> visited(graph.size(), false);
@@ -28,7 +30,7 @@ inline std::vector<int> bfs(const std::vector<std::vector<int>>& graph, int star
     return ans;
 }
 
-inline std::vector<int> dfs(const std::vector<std::vector<int>>& graph, int start_node) {
+inline std::vector<int> dfs(const Graph& graph, int start_node) {
     std::vector<int> ans;
     std::vector<bool> visited(graph.size(), false);
 
